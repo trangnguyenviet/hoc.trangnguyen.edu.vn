@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	{{>head}}
+</head>
+<body class="skin-tn">
+{{>navbar}}
+<div class="wrapper">
+	{{>nav-profiler}}
+	<div class="container" id="content">
+		{{{yield-body}}}
+	</div>
+</div>
+{{>spinner}}
+{{>footer}}
+{{!>message}}
+</body>
+</html>

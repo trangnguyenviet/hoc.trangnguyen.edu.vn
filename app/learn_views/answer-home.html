@@ -1,0 +1,61 @@
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div id="root">
+	<div class="features-boxed">
+		<div class="container">
+			<div class="intro">
+				<h1 class="text-center">Bài giải</h1>
+				<p class="text-center">Chọn môn để vào luyện và xem lời giải</p>
+			</div>
+			<div class="row features">
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/tieng-viet" class="box class-0">
+						<h3 class="name">Tiếng Việt</h3>
+						<p class="number"><i class="fa fa-star" aria-hidden="true"></i></p>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/toan" class="box class-1">
+						<h3 class="name">Toán</h3>
+						<p class="number"><i class="fa fa-calculator" aria-hidden="true"></i></p>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/tieng-anh" class="box class-2">
+						<h3 class="name">Tiếng Anh</h3>
+						<p class="number"><i class="fa fa-comments-o" aria-hidden="true"></i></p>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/khoa-hoc-tu-nhien" class="box class-3">
+						<h3 class="name">Khoa học - Tự nhiên</h3>
+						<p class="number"><i class="fa fa-magnet" aria-hidden="true"></i></p>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/su-dia-xa-hoi" class="box class-4">
+						<h3 class="name">Sử - Địa - Xã hội</h3>
+						<p class="number"><i class="fa fa-map-o" aria-hidden="true"></i></p>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 item">
+					<a href="{{pathname}}/iq-toan-tieng-anh" class="box class-5">
+						<h3 class="name">IQ - Toán - Tiếng Anh</h3>
+						<p class="number"><i class="fa fa-key" aria-hidden="true"></i></p>
+					</a>
+				</div>
+			</div>
+			{{#ads}}
+			<div class="row">
+				{{>ads-vertical}}
+			</div>
+			{{/ads}}
+		</div>
+	</div>
+</div>
+{{/yield-body}}

@@ -1,0 +1,29 @@
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+<script>
+	$(function(){
+		setTimeout(function(){
+			window.location.replace('/');
+		},2000);
+	});
+</script>
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div id="root">
+	<div class="container">
+		<div class="features-boxed">
+			<div class="intro">
+				<h1 class="text-center"> Đăng xuất...</h1>
+			</div>
+		</div>
+		{{#ads}}
+		<div class="row">
+			{{>ads-vertical}}
+		</div>
+		{{/ads}}
+	</div>
+</div>
+{{/yield-body}}

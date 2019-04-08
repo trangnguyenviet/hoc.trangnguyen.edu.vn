@@ -1,0 +1,110 @@
+{{#yield-styles}}
+<link rel="stylesheet" href="{{server_static}}/game/TVUB/css/stylesheet.css" type="text/css" charset="utf-8"/>
+{{#game_1}}
+{{/game_1}}
+{{#game_2}}
+{{/game_2}}
+{{#game_3}}
+{{/game_3}}
+{{#game_4}}
+{{/game_4}}
+{{#game_5}}
+{{/game_5}}
+{{#game_6}}
+{{/game_6}}
+{{#game_7}}
+<link rel="stylesheet" href="{{server_static}}/game/NCDC/assets/css/stylesheet.css" type="text/css" charset="utf-8"/>
+{{/game_7}}
+{{#game_8}}
+{{/game_8}}
+{{#game_9}}
+{{/game_9}}
+{{#game_10}}
+{{/game_10}}
+{{#game_11}}
+{{/game_11}}
+{{#game_12}}
+{{/game_12}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+<script src="{{server_static}}/game/libs/phaser.min.js"></script>
+<script src="{{server_static}}/game/core/core.js"></script>
+<script src="{{server_static}}/game/core/utils.js"></script>
+{{#game_1}}
+<script src="{{server_static}}/game/CVTB/scripts/boot.js"></script>
+<script src="{{server_static}}/game/CVTB/scripts/preload.js"></script>
+<script src="{{server_static}}/game/CVTB/scripts/home.js"></script>
+<script src="{{server_static}}/game/CVTB/scripts/game.js"></script>
+<script src="{{server_static}}/game/CVTB/scripts/end.js"></script>
+{{!<!--<script src="/socket.io/socket.io.js"></script>-->}}
+<script async src="game.min.js"></script>
+{{/game_1}}
+{{#game_2}}
+<script src="{{server_static}}/game/TVUB/scripts/boot.js"></script>
+<script src="{{server_static}}/game/TVUB/scripts/preload.js"></script>
+<script src="{{server_static}}/game/TVUB/scripts/home.js"></script>
+<script src="{{server_static}}/game/TVUB/scripts/game.js"></script>
+<script src="{{server_static}}/game/TVUB/scripts/end.js"></script>
+{{!<!--<script src="/socket.io/socket.io.js"></script>-->}}
+<script async src="game.min.js"></script>
+{{/game_2}}
+{{#game_3}}
+<script src="{{server_static}}/game/HC/core/core.js"></script>
+<script src="{{server_static}}/game/HC/assets/scripts/boot.js"></script>
+<script src="{{server_static}}/game/HC/assets/scripts/preload.js"></script>
+<script src="{{server_static}}/game/HC/assets/scripts/home.js"></script>
+<script src="{{server_static}}/game/HC/assets/scripts/game.js"></script>
+<script src="{{server_static}}/game/HC/assets/scripts/end.js"></script>
+{{!<!--<script src="/socket.io/socket.io.js"></script>-->}}
+<script async src="game.min.js"></script>
+{{/game_3}}
+{{#game_4}}
+<script src="{{server_static}}/game/PTMC/scripts/boot.js"></script>
+<script src="{{server_static}}/game/PTMC/scripts/preload.js"></script>
+<script src="{{server_static}}/game/PTMC/scripts/home.js"></script>
+<script src="{{server_static}}/game/PTMC/scripts/game.js"></script>
+<script src="{{server_static}}/game/PTMC/scripts/end.js"></script>
+{{!<!--<script src="/socket.io/socket.io.js"></script>-->}}
+<script async src="game.min.js"></script>
+{{/game_4}}
+{{#game_5}}
+{{/game_5}}
+{{#game_6}}
+{{/game_6}}
+{{#game_7}}
+<!--<script src="{{server_static}}/game/NCDC/libs/jquery-1.11.3.min.js"></script>-->
+<script src="{{server_static}}/game/NCDC/libs/TweenLite.min.js"></script>
+<!--<script src="libs/phaser.min.js"></script>-->
+<script src="{{server_static}}/game/NCDC/core/core.js"></script>
+<script src="{{server_static}}/game/NCDC/core/utils.js"></script>
+<script src="{{server_static}}/game/NCDC/assets/scripts/boot.js"></script>
+<script src="{{server_static}}/game/NCDC/assets/scripts/preload.js"></script>
+<script src="{{server_static}}/game/NCDC/assets/scripts/home.js"></script>
+<script src="{{server_static}}/game/NCDC/assets/scripts/game.js"></script>
+<script src="{{server_static}}/game/NCDC/assets/scripts/end.js"></script>
+<!--<script src="{{server_static}}/game/NCDC/assets/scripts/main.js"></script>-->
+<script async src="game.min.js"></script>
+{{/game_7}}
+{{#game_8}}
+{{/game_8}}
+{{#game_9}}
+{{/game_9}}
+{{#game_10}}
+{{/game_10}}
+{{#game_11}}
+{{/game_11}}
+{{#game_12}}
+{{/game_12}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div class="container-fluid" id="root">
+	<div class="panel panel-info">
+		<div class="panel-heading">Luyện thi Trạng Nguyên Tiếng Việt</div>
+		<div class="panel-body">
+			<div class="col-md-8 col-md-offset-2" id="tn-game"></div>
+		</div>
+	</div>
+</div>
+{{/yield-body}}

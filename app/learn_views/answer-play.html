@@ -1,0 +1,45 @@
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-page_name}}
+Bài giải lớp {{className}}
+{{/yield-page_name}}
+
+{{#yield-breadcrumb}}
+{{#subject_name}}
+<li><a href="/bai-giai"> Bài giải</a></li>
+<li><a href="{{base_url}}/{{subject_url}}">{{subject_name}}</a></li>
+<li class="active">{{pageName}}</li>
+{{/subject_name}}
+{{/yield-breadcrumb}}
+
+{{#yield-body}}
+<div class="row features-boxed">
+	<div class="col-md-3 col-sm-3 hidden-xs">
+		<div class="list-group">
+			<a href="{{base_url}}/tieng-viet" class="list-group-item">Tiếng Việt <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/toan" class="list-group-item">Toán <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/tieng-anh" class="list-group-item">Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/khoa-hoc-tu-nhien" class="list-group-item">Khoa Học - Tự Nhiên <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/su-dia-xa-hoi" class="list-group-item">Sử - Địa - Xã Hội <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/iq-toan-tieng-anh" class="list-group-item">IQ - Toán Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<script>
+				$(function(){
+					$('.list-group a[href="{{base_url}}/{{subject_url}}"]').addClass('active');
+				});
+			</script>
+		</div>
+	</div>
+	<div class="col-md-9 col-sm-9 col-xs-12">
+		<form onsubmit="return false;">
+		<div id="game">
+
+		</div>
+		</form>
+	</div>
+</div>
+<script type="text/babel" src="play.min.js"></script>
+{{/yield-body}}

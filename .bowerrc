@@ -1,0 +1,7 @@
+{
+	"directory": "app/public/plugins/",
+	"interactive": true,
+	"color": true,
+	"save": true,
+	"ignoredDependencies": []
+}

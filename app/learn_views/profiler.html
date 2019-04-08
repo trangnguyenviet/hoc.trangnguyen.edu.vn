@@ -1,0 +1,177 @@
+{{#yield-styles}}
+<style>
+	.skin-tn .navbar {
+		margin-bottom: 0px;
+	}
+
+	body {
+		background: #fafafa;
+	}
+</style>
+{{#publish}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" />
+{{/publish}}
+{{^publish}}
+<script src="{{server_static}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"></script>
+{{/publish}}
+{{/yield-styles}}
+{{#yield-scripts}}
+{{#publish}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+{{/publish}}
+{{^publish}}
+<script src="{{server_static}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+{{/publish}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<h3> Thông tin tài khoản</h3>
+{{#user}}
+<form class="form-horizontal" id="form-profile">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">ID:</label>
+		<div class="col-sm-8">
+			<input type="number" class="form-control" value="{{_id}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Tên đăng nhập:</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{username}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Họ và tên</label>
+		<div class="col-sm-8">
+			<input id="tb_name" type="text" class="form-control" placeholder="Họ và tên" value="{{name}}" disabled/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Tỉnh/TP</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{province_name}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Quyện/Huyện</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{district_name}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Trường</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{school_name}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Lớp</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" value="{{class_id}}" disabled>
+		</div>
+		<div class="col-sm-4">
+			<input id="tb_class_name" type="text" class="form-control" maxlength="4" value="{{class_name}}" required/>
+		</div>
+	</div>
+	<div class="form-group"><!--class="form-group has-error"-->
+		<label class="col-sm-2 control-label">Ngày sinh</label>
+		<div class="col-sm-8">
+			<div class="input-group date" data-provide="datepicker">
+				<input id="tb_birthday" type="text" class="form-control" value="" disabled/>
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-th"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-8">
+			<span class="label label-danger" id="lb_message"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Cập nhật</button>
+		</div>
+	</div>
+</form>
+<script>
+	$(function(){
+		var tb_name = $('#tb_name');
+		var tb_class_name = $('#tb_class_name');
+		var tb_birthday = $('#tb_birthday');
+		var lb_message = $('#lb_message');
+		$.fn.datepicker.defaults.format = "dd/mm/yyyy";
+		tb_birthday.datepicker({
+			format: "dd/mm/yyyy",
+			autoclose: true,
+			language: "vi"
+		}).val(util.date2String3(new Date('{{birthday}}')));
+
+		var validate = function(fullname, class_name, birthday) {
+			var msg = '';
+			if(fullname==''){
+				msg = 'Hãy nhập họ tên';
+			} else if(fullname.length<3 && fullname.length>30){
+				if(msg!='') msg +='<br/>';
+				msg += 'Họ tên không đúng, phải dài từ 3 đến 30 ký tự';
+			} else if(!util.isNameVi(fullname)){
+				if(msg!='') msg +='<br/>';
+				msg += 'Họ tên không đúng, không có ký tự đặc biệt và số';
+			}
+
+			if(class_name==''){
+				if(msg!='') msg +='<br/>';
+				msg += 'Hãy nhập tên lớp';
+			} else if(/^[a-zA-Z0-9\/]{1,4}$/.test(class_name)==false) {
+				if(msg!='') msg +='<br/>';
+				msg += 'Hãy nhập tên lớp';
+			}
+
+			if(birthday==''){
+				if(msg!='') msg +='<br/>';
+				msg += 'Hãy chọn ngày sinh';
+			} else if(!util.isValidDate(birthday)){
+				if(msg!='') msg +='<br/>';
+				msg += 'Định dạng ngày tháng không đúng';
+			}
+			return msg;
+		};
+
+		$('#form-profile').on('submit', function(e){
+			e.preventDefault();
+			var name = tb_name.val();
+			var class_name = tb_class_name.val();
+			var birthday = tb_birthday.val();
+			var msg = validate(name, class_name, birthday);
+			if (msg=='') {
+				$.ajax({
+					url: window.location.pathname,
+					type: 'POST',
+					dataType: 'json',
+					data: {name, class_name, birthday},
+					beforeSend: function(xhr){
+						spinner.show();
+					},
+					success: function (res) {
+						if (res.error == 0) {
+							Alert('Cập nhật thông tin thành công', 'Thông báo', function() {
+								window.location.reload(true);
+							});
+						}
+						else {
+							lb_message.text(res.message);
+							Alert(res.message);
+						}
+					}
+				}).always(function(){
+					spinner.hide();
+				});
+			} else {
+				lb_message.html(msg);
+			}
+		});
+	});
+</script>
+{{/user}}
+{{/yield-body}}

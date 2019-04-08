@@ -1,0 +1,30 @@
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<section>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<ul class="thread-list">
+				{{#rounds}}
+				<script>
+					var rounds={{{rounds}}};
+					var free = {{{free}}};
+					var payment_round = {{{payment_round}}};
+					for(var round in rounds){
+						if(round<={{current_round}}) document.writeln('<li class="thread open"> <a href="{{baseUrl}}/{{subject}}/vong-' + round + '"> <span class="round">Vòng ' + round + '</span> <span class="title">' + rounds[round].name + '</span> <span class="time"><i class="fa fa-clock-o"></i> 20/11</span> </a> </li>');
+						else document.writeln('<li class="thread"> <a href="javascript: void(0)" onclick="javascript: Alert(\'Vòng này chưa được mở\'); return false;"> <span class="round">Vòng ' + round + '</span> <span class="title">' + rounds[round].name + '</span> <span class="time"><i class="fa fa-clock-o"></i> 20/11</span> </a> </li>');
+					}
+				</script>
+				{{/rounds}}
+			</ul>
+		</div>
+	</div>
+</section>
+<template id="temp-round">
+
+</template>
+{{/yield-body}}

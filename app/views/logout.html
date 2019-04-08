@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>logout</title>
+	{{#login_google}}
+	<meta name="google-signin-client_id" content="143091150542-n4qfq8ed9plbtfmt8eef8n4pd30r4csv.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js"></script>
+	{{/login_google}}
+</head>
+<body>
+{{#login_facebook}}
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1602816746662387";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1602816746662387',
+			cookie     : true,
+			xfbml      : true,
+			version    : 'v2.10'
+		});
+		FB.getLoginStatus(function(res) {
+			FB.logout(function(n){});
+		});
+	};
+	</script>
+{{/login_facebook}}
+{{#login_google}}
+	<div style="display: none" class="g-signin2" data-onsuccess="signOut"></div>
+	<script>
+		function signOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+				window.location.replace('/');
+			});
+		}
+		setTimeout(function(){
+			window.location.replace('/');
+		},5000);
+	</script>
+{{/login_google}}
+</body>
+</html>

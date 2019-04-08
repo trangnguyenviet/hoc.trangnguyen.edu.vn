@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /tai-khoan
+Sitemap: http://baigiai.trangnguyen.edu.vn/sitemap.xml

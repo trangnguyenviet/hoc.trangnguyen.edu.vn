@@ -1,0 +1,18 @@
+{{!layout:'layout'}}
+
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div class="container">
+	<h2>Danh mục tin</h2>
+	<div class="list-group">
+		{{#categorys}}
+			<a href="/{{name_ko_dau}}" class="list-group-item">{{name}}<span class="badge">{{_id}}</span></a>
+		{{/categorys}}
+	</div>
+</div>
+{{/yield-body}}

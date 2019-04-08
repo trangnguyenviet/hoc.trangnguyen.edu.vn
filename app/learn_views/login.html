@@ -1,0 +1,110 @@
+{{#yield-styles}}
+<meta name="google-signin-client_id" content="143091150542-n4qfq8ed9plbtfmt8eef8n4pd30r4csv.apps.googleusercontent.com">
+{{/yield-styles}}
+
+{{#yield-scripts}}
+<script src="https://www.google.com/recaptcha/api.js?hl=vi&onload=onloadCallback&render=explicit" async defer></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div class="container" id="root">
+	<div class="row">
+		<div class="col-sm-offset-4 col-sm-4 col-xs-12 login">
+			<h1>Đăng nhập</h1>
+			<form role="form" class="form-horizontal" data-toggle="validator">
+				<div class="form-group">
+					<label>Tên đăng nhập:</label>
+					<input type="text" class="form-control" id="tb_username" placeholder="nhập tên đăng nhập" autocomplete="off" minlength="6" maxlength="20" required/>
+				</div>
+				<div class="form-group">
+					<label>Mật khẩu:</label>
+					<input type="password" class="form-control" id="tb_password" placeholder="nhập mật khẩu" minlength="6" maxlength="30" required/>
+				</div>
+				<div class="form-group">
+					<label>Xác nhận người dùng:</label>
+					{{!<!--<div class="g-recaptcha" data-sitekey="6Ld4EwsTAAAAAFOo7eKyX0VXn6tL6dYN1ebn2w-z"></div>-->}}
+					<div id="captcha"></div>
+				</div>
+				<!--<div class="checkbox">
+					<label><input type="checkbox" id="cb_remember"> Ghi nhớ</label>
+				</div>-->
+				<p class="message"></p>
+				<div class="text-center" id="lb_message"></div>
+				<div class="text-center">
+					<button type="submit" class="form-control btn btn-primary">Đăng nhập</button>
+				</div>
+				<div class="social-login">
+					<p>- - - - - - - - - - - - - Hoặc có thể đăng nhập với - - - - - - - - - - - - - </p>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i> Google+</a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+					</ul>
+				</div>
+			</form>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	{{#ads}}
+	{{>ads-vertical}}
+	{{/ads}}
+</div>
+<script>
+	'use strict';
+	var captcha1;
+	var onloadCallback = function(){
+		captcha1 = grecaptcha.render('captcha', {
+			'sitekey' : '6Ld4EwsTAAAAAFOo7eKyX0VXn6tL6dYN1ebn2w-z',
+			'theme' : 'light',
+			'callback' : function(capt){console.log(capt);}
+		});
+	};
+	$(function(){
+		var tb_username = $('#tb_username');
+		var tb_password = $('#tb_password');
+		//var cb_remember = $('#cb_remember');
+		var lb_message = $('#lb_message');
+		$('.login form').on('submit', function (event) {
+			event.preventDefault();
+			var username = tb_username.val();
+			var password = tb_password.val();
+			//var remember = cb_remember.val();
+			var captcha = grecaptcha.getResponse(captcha1);
+			if (username.length < 6 || username.length > 20) {
+				return Alert('Tên đăng nhập phải từ 6 đến 20 ký tự');
+			}
+			else if (!util.isUsername(username)) {
+				return Alert('Tên đăng nhập không có ký tự đặc biệt');
+			}
+			else if (password.length < 6 || password.length > 30) {
+				return Alert('Mật khẩu phải từ 6 đến 30 ký tự');
+			}
+			else if (!captcha) {
+				return Alert('Bạn hãy xác nhận không phải là người máy');
+			}
+			$.ajax({
+				url: window.location.pathname,
+				type: 'POST',
+				dataType: 'json',
+				data: {username, password, captcha},
+				beforeSend: function(xhr){
+					lb_message.text('Đang kiểm tra...');
+					spinner.show();
+				},
+				success: function (res) {
+					if (res.error == 0) {
+						window.location.href = '{{back}}';
+					}
+					else {
+						lb_message.text(res.message);
+						grecaptcha.reset(captcha1);
+					}
+				}
+			}).always(function(){
+				spinner.hide();
+			});
+		});
+	});
+</script>
+{{/yield-body}}

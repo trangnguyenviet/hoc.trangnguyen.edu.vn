@@ -1,0 +1,120 @@
+{{#yield-page_name}}
+Luyện tập lớp {{className}}
+{{/yield-page_name}}
+
+{{#yield-breadcrumb}}
+{{#subject_name}}
+<li><a href="/luyen-tap"> Luyện tập</a></li>
+<li class="active">{{subject_name}}</li>
+{{/subject_name}}
+{{^subject_name}}
+<li class="active">lớp {{className}}</li>
+{{/subject_name}}
+{{/yield-breadcrumb}}
+
+{{#yield-body}}
+<div class="row features-boxed">
+	<div class="col-md-3 col-sm-3 hidden-xs">
+		<div class="list-group">
+			<a href="{{base_url}}/tieng-viet" class="list-group-item">Tiếng Việt <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/toan" class="list-group-item">Toán <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/tieng-anh" class="list-group-item">Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/khoa-hoc-tu-nhien" class="list-group-item">Khoa Học - Tự Nhiên <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/su-dia-xa-hoi" class="list-group-item">Sử - Địa - Xã Hội <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/iq-toan-tieng-anh" class="list-group-item">IQ - Toán Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<script>
+				$(function(){
+					$('.list-group a[href="{{base_url}}/{{subject_url}}"]').addClass('active');
+				});
+			</script>
+		</div>
+	</div>
+	<div class="col-md-9 col-sm-9 col-xs-12" id="table">
+	</div>
+	{{#subject_info}}
+	<script type="text/babel">
+			var subject_info = {{{subject_info}}};
+			var rounds=subject_info.rounds;
+			var current_round = subject_info.current_round;
+//			var payment_round = subject_info.payment_round;
+			var Tbody = React.createClass({
+//				click(round){
+//					var path = '{{pathname}}/vong-' + round;
+//					if(round>=payment_round){
+//						$.ajax({
+//							url: '/user/check-vip',
+//							type: 'POST',
+//							dataType: 'json',
+//							data: {},
+//							beforeSend: function(xhr){
+//								//loading...
+//							},
+//							success: function (res) {
+//								if (res.error == 0) {
+//									window.location.href = path;
+//								}
+//								else {
+//									Alert(res.message);
+//								}
+//							}
+//						});
+//					}
+//					else{
+//						window.location.href = path;
+//					}
+//				},
+				getInitialState: function(){
+					return {rounds};
+				},
+				render: function(){
+					return(
+						<tbody>
+							{
+								Object.keys(this.state.rounds).map(round =>{
+									var round_info = rounds[round];
+									return (
+										<tr>
+											<td className="text-center">Vòng {round}</td>
+											<td>{round_info.name}</td>
+											<td className="text-center">{round_info.score || ''}</td>
+											<td className="text-center">{round_info.time || ''}</td>
+											<td className="text-center">{
+												(round<=current_round)?(
+													<a href={'{{pathname}}/vong-' + round} className="btn btn-warning btn-sm" role="button">Luyện tập</a>
+												):(
+													<i className="fa fa-lock" aria-hidden="true"></i>
+												)
+											}</td>
+										</tr>
+									)
+								})
+							}
+						</tbody>
+					);
+				},
+				componentDidMount(){
+					//
+				}
+			});
+
+			if(rounds && Object.keys(rounds).length>0){
+				ReactDOM.render(
+					<div className="table-responsive">
+						<table className="table table-bordered table-hover">
+							<thead>
+							<tr>
+								<th className="text-center">Vòng</th>
+								<th className="text-center">Mô tả</th>
+								<th className="text-center">Điểm</th>
+								<th className="text-center">Thời gian</th>
+								<th className="text-center">Luyện tập</th>
+							</tr>
+							</thead>
+							<Tbody/>
+						</table>
+					</div>, document.querySelector('#table'));
+			}
+	</script>
+	{{/subject_info}}
+</div>
+{{/yield-body}}

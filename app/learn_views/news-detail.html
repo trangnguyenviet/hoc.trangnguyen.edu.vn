@@ -1,0 +1,32 @@
+{{!layout:'layout'}}
+
+{{#yield-styles}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div class="row">
+	<div class="col-md-2 col-sm-2 hidden-xs">&nbsp;</div>
+	<div class="col-md-8 col-sm-8 col-xs-12">
+		{{#info}}
+		<h1>{{name}}</h1>
+		<div class="row">
+			<div class="col-md-12">
+				{{{content}}}
+			</div>
+		</div>
+		{{/info}}
+		<hr/>
+		<div class="row">
+			<h2>Tin tức khác</h2>
+			<ul>
+				{{#others}}
+				<li><a href="{{baseUrl}}/{{name_ko_dau}}.{{_id}}">{{name}}</a></li>
+				{{/others}}
+			</ul>
+		</div>
+	</div>
+</div>
+{{/yield-body}}

@@ -1,0 +1,130 @@
+{{#yield-styles}}
+<style>
+	.skin-tn .navbar {
+		margin-bottom: 0px;
+	}
+
+	body {
+		background: #fafafa;
+	}
+</style>
+{{#publish}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" />
+{{/publish}}
+{{^publish}}
+<script src="{{server_static}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"></script>
+{{/publish}}
+{{/yield-styles}}
+{{#yield-scripts}}
+{{#publish}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+{{/publish}}
+{{^publish}}
+<script src="{{server_static}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+{{/publish}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<h3> Thông tin email <small>Liên kết email để nhận tin tức mới nhất và hỗ trợ lấy lại mật khẩu</small></h3>
+{{#user}}
+<form class="form-horizontal" id="form-profile">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">ID:</label>
+		<div class="col-sm-8">
+			<input type="number" class="form-control" value="{{_id}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Tên đăng nhập:</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{username}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Email:</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" value="{{email}}" disabled>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-8">
+			<span class="label label-danger" id="lb_message"></span>
+		</div>
+	</div>
+	<!--<div class="form-group">-->
+		<!--<div class="col-sm-offset-2 col-sm-10">-->
+			<!--<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Cập nhật</button>-->
+		<!--</div>-->
+	<!--</div>-->
+</form>
+<script>
+	$(function(){
+		var tb_old_password = $('#tb_old_password');
+		var tb_new_password = $('#tb_new_password');
+		var tb_re_password = $('#tb_re_password');
+		var lb_message = $('#lb_message');
+
+		const validate = (old_password, new_password, re_password) => {
+			if(old_password === ''){
+				return 'Hãy nhập mật khẩu cũ';
+			} else if(old_password.length < 6 || old_password.length > 30){
+				return 'Mật khẩu phải từ 6 đến 30 ký tự';
+			}
+
+			if(new_password === ''){
+				return 'Hãy nhập mật khẩu';
+			} else if(new_password.length < 6 || new_password.length>30){
+				return 'Mật khẩu mới phải từ 6 đến 30 ký tự';
+			}
+			if(re_password === ''){
+				return 'Hãy nhập nhập lại mật khẩu';
+			}
+			else if(new_password !== re_password){
+				return 'Mật khẩu mới và nhập lại mật khẩu không trùng khớp';
+			} else if(re_password.length < 6 || re_password.length>30){
+				return 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự';
+			}
+
+			return '';
+		};
+
+		$('#form-profile').on('submit', function(e){
+			e.preventDefault();
+			var old_password = tb_old_password.val();
+			var new_password = tb_new_password.val();
+			var re_password = tb_re_password.val();
+			lb_message.text('');
+			var msg = validate(old_password, new_password, re_password);
+			if (msg === '') {
+				$.ajax({
+					url: window.location.pathname,
+					type: 'POST',
+					dataType: 'json',
+					data: {old_password, new_password, re_password},
+					beforeSend: function(xhr){
+						spinner.show();
+					},
+					success: function (res) {
+						if (res.error === 0) {
+							Alert('Cập nhật mật khẩu thành công', 'Thông báo', function() {
+								tb_old_password.val('');
+								tb_new_password.val('');
+								tb_re_password.val('');
+							});
+						}
+						else {
+							lb_message.text(res.message);
+							Alert(res.message);
+						}
+					}
+				}).always(function(){
+					spinner.hide();
+				});
+			} else {
+				lb_message.html(msg);
+			}
+		});
+	});
+</script>
+{{/user}}
+{{/yield-body}}

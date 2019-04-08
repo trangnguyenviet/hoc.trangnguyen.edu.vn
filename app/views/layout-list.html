@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	{{>head}}
+</head>
+<body class="skin-tn">
+{{>header}}
+<div class="container-fluid" id="root">
+	<div class="row">
+		{{#ads}}<div class="col-md-10 col-xs-12">{{/ads}}
+		{{^ads}}<div class="col-xs-12">{{/ads}}
+			<section class="content-header">
+				<h1>
+					{{{yield-page_name}}}
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-home"></i></a></li>
+					{{{yield-breadcrumb}}}
+				</ol>
+			</section>
+			<section class="content">
+				{{{yield-body}}}
+			</section>
+		</div>
+
+		{{#ads}}
+		<div class="col-md-2 col-xs-12">
+			{{>ads-right}}
+		</div>
+		{{/ads}}
+	</div>
+</div>
+{{>spinner}}
+</body>
+{{>footer}}
+{{!>message}}
+</html>

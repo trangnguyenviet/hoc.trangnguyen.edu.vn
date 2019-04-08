@@ -1,0 +1,11 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async src="https://media1.admicro.vn/core/admcore.js"></script>
+<script type="text/javascript">
+	var admicroAD = window.admicroAD || {};
+	admicroAD.unit = admicroAD.unit || [];
+	$(function(){
+		$('.admzone').each(function(index, div){
+			admicroAD.unit.push(function(){admicroAD.show($(div).attr('id'));});
+		});
+	});
+</script>

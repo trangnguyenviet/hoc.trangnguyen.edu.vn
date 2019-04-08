@@ -1,0 +1,56 @@
+<title>{{title}}</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="3600" http-equiv="REFRESH" />
+<link rel="shortcut icon" href="/favicon.ico">
+{{#publish}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+{{/publish}}
+{{^publish}}
+<link rel="stylesheet" href="{{server_static}}/plugins/bootstrap/dist/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="{{server_static}}/plugins/bootstrap/dist/css/bootstrap-theme.min.css">-->
+<link rel="stylesheet" href="{{server_static}}/plugins/components-font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{server_static}}/plugins/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="{{server_static}}/plugins/animate.css/animate.min.css">
+{{/publish}}
+<link rel="stylesheet" href="{{server_static}}/css/plugin.min.css">
+<link rel="stylesheet" href="{{server_static}}/css/all.min.css">
+{{{yield-styles}}}
+{{#publish}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+{{/publish}}
+{{^publish}}
+<script src="{{server_static}}/plugins/jquery/dist/jquery.min.js"></script>
+<script src="{{server_static}}/plugins/bootbox.js/bootbox.js"></script>
+<script src="{{server_static}}/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{server_static}}/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{server_static}}/js/react.min.js"></script>
+<script src="{{server_static}}/js/react-dom.min.js"></script>
+<script src="{{server_static}}/js/babel.min.js"></script>
+{{/publish}}
+<script src="{{server_static}}/plugins/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+{{#ads}}
+{{>head-ads}}
+{{/ads}}
+<script src="{{server_static}}/js/util.min.js"></script>
+<script src="{{server_static}}/js/script.min.js"></script>
+<script src="https://cdn.ravenjs.com/3.26.2/raven.min.js" crossorigin="anonymous"></script>
+<script>Raven.config('https://1330a939f7c3421686355eda5578ae96@sentry.trangnguyen.edu.vn/3',{whitelistUrls: [/trangnguyen\.edu\.vn/, /hoc\.trangnguyen\.edu\.vn/]}).install()</script>
+{{#user}}
+<script>
+	window.isLogin = true;
+	Raven.setUserContext({id: '{{_id}}', class_id: '{{class_id}}'});
+</script>
+{{/user}}
+{{{yield-scripts}}}

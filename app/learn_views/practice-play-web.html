@@ -1,0 +1,60 @@
+{{#yield-styles}}
+{{#publish}}
+<link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/npm/icheck-bootstrap@1.0.7/icheck-bootstrap.min.css'>
+{{/publish}}
+{{^publish}}
+<link rel="stylesheet" href="{{server_static}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+{{/publish}}
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div class="container-fluid" id="root">
+	<div class="row features-boxed">
+		<div class="col-md-8 col-md-offset-2">
+			<form>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						Luyện tập Tiếng Việt - Vòng 3 - bài 1
+						<div class="pull-right text-red" id="count_down">00:00</div>
+					</div>
+					<div class="panel-body">
+						<div class="alert alert-danger fade in">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Chú ý:</strong> Em hãy đọc kỹ câu hỏi và ĐIỀN vào chỗ trống hoặc CHỌN 1 trong 4 đáp án cho sẵn. Nếu CHỌN đáp án em hãy click chuột vào ô tròn trước đáp án. Nếu ĐIỀN vào chỗ trống, em hãy ĐIỀN chữ cái, từ, số, ký hiệu toán học, hoặc phép tính. Chú ý, phân số em ĐIỀN theo dạng a/b.Nếu là số thập phân em dùng dấu chấm, ví dụ 1.25 và sau khi làm xong 10 câu hỏi em ấn nút nộp bài.
+						</div>
+						<div id="div_questions">
+							{{!<!--<article>
+								<h3> Câu hỏi 1</h3>
+								<p>Google Chrome is a free, open-source web browser developed by Google, released in 2008.</p>
+								<div class="radio icheck-wisteria">
+									<input id="cb_1_1" type="radio" name="optradio"/><label for="cb_1_1">Option 1</label>
+								</div>
+								<div class="radio icheck-wisteria">
+									<input id="cb_1_2" type="radio" name="optradio"/><label for="cb_1_2">Option 2</label>
+								</div>
+								<div class="radio icheck-wisteria">
+									<input id="cb_1_3" type="radio" name="optradio"/><label for="cb_1_3">Option 3</label>
+								</div>
+								<div class="radio icheck-wisteria">
+									<input id="cb_1_4" type="radio" name="optradio"/><label for="cb_1_4">Option 3</label>
+								</div>
+							</article>-->}}
+						</div>
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button id="bt_endgame" type="button" class="btn btn-lg btn-warning" disabled> Nộp bài</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script async src="web.min.js" type="text/javascript"></script>
+{{/yield-body}}

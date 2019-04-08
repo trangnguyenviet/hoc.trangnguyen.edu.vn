@@ -1,0 +1,97 @@
+{{#yield-page_name}}
+Luyện tập lớp {{className}}
+{{/yield-page_name}}
+
+{{#yield-breadcrumb}}
+{{#subject_name}}
+<li><a href="/luyen-tap"> Luyện tập</a></li>
+<li><a href="/luyen-tap/{{subject_url}}">{{subject_name}}</a></li>
+<li class="active">Vòng {{round}}</li>
+{{/subject_name}}
+{{/yield-breadcrumb}}
+
+{{#yield-body}}
+<div class="row features-boxed">
+	<div class="col-md-3 col-sm-3 hidden-xs">
+		<div class="list-group">
+			<a href="{{base_url}}/tieng-viet" class="list-group-item">Tiếng Việt <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/toan" class="list-group-item">Toán <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/tieng-anh" class="list-group-item">Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/khoa-hoc-tu-nhien" class="list-group-item">Khoa Học - Tự Nhiên <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/su-dia-xa-hoi" class="list-group-item">Sử - Địa - Xã Hội <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<a href="{{base_url}}/iq-toan-tieng-anh" class="list-group-item">IQ - Toán Tiếng Anh <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+			<script>
+				$(function(){
+					$('.list-group a[href="{{base_url}}/{{subject_url}}"]').addClass('active');
+				});
+			</script>
+		</div>
+	</div>
+	<div class="col-md-9 col-sm-9 col-xs-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">Quy định thi Trạng Nguyên Tiếng Việt</div>
+			<div class="panel-body">
+				<h3>Lưu ý:</h3>
+				Thời gian vòng thi sẽ bắt đầu tính khi bạn chọn nút “Làm bài thi”
+				<br/>Thời gian vòng thi sẽ tính bằng thời gian thi + giải lao
+				<br/>Điểm thi của bạn phải <strong>≥ 50%</strong> của vòng thi bạn mới qua
+				<h3>Các trường hợp thi sai luật:</h3>
+				Đăng nhập một tài khoản trên hai máy hoặc hai trình duyệt khác nhau và thi cùng một thời điểm
+				<br/>Đang làm bài thi mà tải lại trang đề thi hoặc thoát ra không nộp bài
+				<br/>Mở nhiều cửa sổ vào thi một lúc
+				<h3>Trình duyệt hỗ trợ:</h3>
+				Trình duyệt hỗ trợ thi tốt nhất bằng <strong>Google Chrome</strong> có thể download <strong><a target="_blank" href="https://www.google.com/chrome/browser/desktop/">tại đây</a></strong>
+				<h3>Bộ bõ Tiếng Việt:</h3>
+				Sử dụng bộ gõ <strong>Unikey</strong> hỗ trợ đầy đủ và tốt nhất, bạn có thể <strong><a target="_blank" href="http://www.unikey.org/bdownload.php">download </a></strong> tại trang chủ chính thức của Unikey, phiên bản mới nhất: <strong><a target="_blank" href="http://www.unikey.org/bdownload.php">4.2 RC4</a></strong>
+				<br/>Tại màn hình <strong>Desktop</strong>, Click chuột phải vào <strong>My computer</strong>/<strong>Computer</strong> chọn <strong>Properties</strong>, tại dòng <strong>System</strong> > <strong>System type</strong> sẽ hiển thị hệ điều hành của bạn sửa dụng 32bit hay 64bit
+				<br/><a target="_blank" href="http://sourceforge.net/projects/unikey/files/unikey-win/4.2%20RC4/unikey42RC4-140823-win32.zip/download">Download </a> bản 32bit nếu hệ điều hành máy bạn đang sử dụng 32bit
+				<br/><a target="_blank" href="http://sourceforge.net/projects/unikey/files/unikey-win/4.2%20RC4/unikey42RC4-140823-win64.zip/download">Download </a> bản 64bit nếu hệ điều hành máy bạn đang sử dụng 64bit
+				<br/>Đối với máy tính Ubuntu có thể cài đặt ibus-unikey tại <a target="_blank" href="https://apps.ubuntu.com/cat/applications/precise/ibus-unikey/">Ubuntu app </a>
+				<br/><strong>Chú ý:</strong> BTC đang sử dụng kiểu bỏ dấu <strong style="color:#0b880c">Unicode dựng sẵn</strong>, nếu các bạn để <strong style="color:#F00">Unicode tổ hợp</strong> sẽ sai so với đáp án.
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<button onclick="checkPlay(1)" type="button" class="btn btn-warning">Bài 1</button>&nbsp;&nbsp;
+						<button onclick="checkPlay(2)" type="button" class="btn btn-warning">Bài 2</button>&nbsp;&nbsp;
+						<button onclick="checkPlay(3)" type="button" class="btn btn-warning">Bài 3</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var checkPlay = function(test){
+			if({{pass}}){
+				$.ajax({
+					url: window.location.pathname + '/check',
+					type: 'POST',
+					dataType: 'json',
+					data: {test},
+					beforeSend: function(xhr){
+						//loading...
+					},
+					success: function (res) {
+						if (res.error == 0) {
+							window.location.href = '{{pathname}}/bai-' + test + '.html';
+						}
+						else {
+							Alert(res.message);
+						}
+					}
+				});
+			}
+			else{
+				{{#redirect}}
+				Alert('{{{message}}}','Xác nhận',function(){
+					window.location.href = '{{redirect}}';
+				});
+				{{/redirect}}
+				{{^redirect}}
+					Alert('{{{message}}}');
+				{{/redirect}}
+			}
+		}
+	</script>
+</div>
+{{/yield-body}}

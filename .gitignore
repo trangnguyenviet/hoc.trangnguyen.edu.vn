@@ -1,0 +1,8 @@
+.idea
+
+node_modules/
+/temps/
+/test*.js
+/app/public/sitemap.xml
+/package-lock.json
+/app/public/plugins

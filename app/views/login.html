@@ -1,0 +1,165 @@
+{{#yield-styles}}
+<meta name="google-signin-client_id" content="143091150542-n4qfq8ed9plbtfmt8eef8n4pd30r4csv.apps.googleusercontent.com">
+{{/yield-styles}}
+
+{{#yield-scripts}}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1602816746662387";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 hidden-xs"></div>
+		<div class="col-sm-offset-4 col-sm-4 col-xs-12 login">
+			<form role="form" class="form-horizontal" data-toggle="validator"  onsubmit="return login();">
+				<div class="form-group">
+					<label for="tb_username">Tên đăng nhập:</label>
+					<input type="text" class="form-control" maxlength="20" id="tb_username" placeholder="Tên đăng nhập" autocomplete="off" required="">
+				</div>
+				<div class="form-group">
+					<label for="tb_password">Mật khẩu:</label>
+					<input type="password" class="form-control" placeholder="Mật khẩu" maxlength="30" id="tb_password" required="">
+				</div>
+				<div class="form-group">
+					<div class="g-recaptcha" data-sitekey="6Ld4EwsTAAAAAFOo7eKyX0VXn6tL6dYN1ebn2w-z"></div>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" id="remember_me"> Ghi nhớ</label>
+				</div>
+				<p class="message" id="lb_msg"></p>
+				<div class="text-center">
+					<button type="button" class="form-control btn btn-primary">Đăng nhập</button>
+				</div>
+
+				<div class="row text-center" style="margin-top: 10px">
+					<div class="col-sm-12">
+						<a class="btn btn-info" href="/" onclick="return loginFacebook()"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+						<a class="btn btn-info" href="https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&amp;state=admin-login&amp;redirect_uri=http%3A%2F%2Fadmin.trangnguyen.edu.vn%2Flogin-google.php&amp;response_type=token&amp;client_id=143091150542-s4v3idbma05i15u55kddi7bjisjapuk3.apps.googleusercontent.com"><i class="fa fa-google" aria-hidden="true"></i> Google</a>
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	var urlBack = '{{back}}';
+
+	//default login
+	function login(){
+		return false;
+	}
+
+	//facebook login
+	function loginFacebook(){
+		FB.login(function(response) {
+			statusChangeCallback(response);
+		}, {scope: 'public_profile,email'});
+		return false;
+	}
+	function statusChangeCallback(response) {
+		if (response.status === 'connected') {
+			$.ajax({
+				url: "/dang-nhap/facebook",
+				type: 'POST',
+				dataType: "json",
+				data: response.authResponse,
+				//beforeSend: function(xhr){
+				//	spinner.show();
+				//},
+				success:function(data){
+					if(data.error==0){
+						if(data.isRegister){
+							Confirm('Facebook <strong>' + data.fbData.name + '</strong> không có trong hệ thống, bạn có muốn tạo tài khoản không?','Xác nhận', function(result){
+								if(result) window.location.href = '/dang-ky' + (urlBack!=''?'?back=' + urlBack: '');
+								else FB.logout(function(n){});
+							});
+						}
+						else{
+							window.location.href = urlBack;
+						}
+					}
+					else{
+						Alert(data.message);
+					}
+				}
+			});
+		}
+	}
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1602816746662387',
+			cookie     : true,
+			xfbml      : true,
+			version    : 'v2.10'
+		});
+		FB.getLoginStatus(function(response) {
+			statusChangeCallback(response);
+		});
+	};
+
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/vi_VN/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	//function loginFacebook(){return FB.login(function(n){statusChangeCallback(n)},{scope:"public_profile,email"}),!1}function statusChangeCallback(n){"connected"===n.status&&$.ajax({url:"/dang-nhap/facebook",type:"POST",dataType:"json",data:n.authResponse,success:function(n){0==n.error?n.isRegister?Confirm("Facebook <strong>"+n.fbData.name+"</strong> không có trong hệ thống, bạn có muốn tạo tài khoản không?","Xác nhận",function(n){n?window.location.href="/dang-ky":FB.logout(function(n){})}):window.location.href=urlBack:Alert(n.message)}})}window.fbAsyncInit=function(){FB.init({appId:"1602816746662387",cookie:!0,xfbml:!0,version:"v2.10"}),FB.getLoginStatus(function(n){statusChangeCallback(n)})},function(n,t,e){var o,a=n.getElementsByTagName(t)[0];n.getElementById(e)||(o=n.createElement(t),o.id=e,o.src="//connect.facebook.net/vi_VN/sdk.js",a.parentNode.insertBefore(o,a))}(document,"script","facebook-jssdk");
+
+	//google login
+	function onSignIn(googleUser) {
+		$.ajax({
+			url: "/dang-nhap/google",
+			type: 'POST',
+			dataType: "json",
+//			data: googleUser,
+			data: {accessToken: googleUser.Zi.access_token},
+			//beforeSend: function(xhr){
+			//	spinner.show();
+			//},
+			success:function(data){
+				if(data.error==0){
+					if(data.isRegister){
+						Confirm('Facebook <strong>' + data.fbData.name + '</strong> không có trong hệ thống, bạn có muốn tạo tài khoản không?','Xác nhận', function(result){
+							if(result) window.location.href = '/dang-ky' + (urlBack!=''?'?back=' + urlBack: '');
+							else FB.logout(function(n){});
+						});
+					}
+					else{
+						window.location.href = urlBack;
+					}
+				}
+				else{
+					Alert(data.message);
+				}
+			}
+		});
+//		console.log(JSON.stringify(googleUser));
+//		console.log(googleUser.Zi.access_token);
+//		var profile = googleUser.getBasicProfile();
+//		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//		console.log('Name: ' + profile.getName());
+//		console.log('Image URL: ' + profile.getImageUrl());
+//		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
+	//google signout
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+			console.log('User signed out.');
+		});
+	}
+</script>
+{{/yield-body}}

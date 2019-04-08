@@ -1,0 +1,57 @@
+{{#yield-styles}}
+<style>
+	.item-box {
+		margin-bottom: 30px;
+		text-align: center;
+	}
+
+	.item-box .item {
+		border: 1px solid #aaa;
+		padding: 10px;
+		text-align: center;
+	}
+
+	.item-box .item .icon{
+		font-size: 10em;
+	}
+</style>
+{{/yield-styles}}
+
+{{#yield-scripts}}
+{{/yield-scripts}}
+
+{{#yield-body}}
+<div id="root">
+	<div class="container">
+		<div class="features-boxed">
+			<div class="intro">
+				<h1 class="text-center"> Trạng Nguyên Tiếng Việt</h1>
+				<p class="text-center">Chinh phục kiến thức - vững bước tương lai</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 item-box">
+				<div class="item">
+					<i class="glyphicon glyphicon-user icon"></i>
+					<h2>Luyện tập</h2>
+					<p>Để thi tốt nhất 19 vòng thi chính thức hãy luyện tập để nâng cao kiến thức, nắm vững các dạng bài thi.</p>
+					<p><a class="btn btn-success" href="/luyen-tap" role="button">Xem chi tiết »</a></p>
+				</div>
+			</div>
+			<div class="col-lg-6 item-box">
+				<div class="item">
+					<i class="glyphicon glyphicon-time icon"></i>
+					<h2>Bài giải</h2>
+					<p>Hướng dẫn giải bài tập sách giáo khoa, hướng dẫn giải bài tập nâng cao. Các bé sẽ được học theo các chuyên đề phù hợp, gắn liền với sách giáo khoa.</p>
+					<p><a class="btn btn-success" href="/bai-giai" role="button">Xem chi tiết »</a></p>
+				</div>
+			</div>
+		</div>
+		{{#ads}}
+		<div class="row">
+			{{>ads-vertical}}
+		</div>
+		{{/ads}}
+	</div>
+</div>
+{{/yield-body}}

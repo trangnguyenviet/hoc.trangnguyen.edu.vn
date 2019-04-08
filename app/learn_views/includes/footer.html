@@ -1,0 +1,56 @@
+<footer class="footer-distributed">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 col-xs-12 footer-left text-center">
+				<img src="{{server_static}}/images/logo-237x121.png" class="img-responsive"/>
+				<h4>Chinh phục kiến thức - vững bước tương lai</h4>
+				<!--<p class="footer-company-name"></p>-->
+			</div>
+			<div class="col-md-4 col-xs-12 footer-center">
+				<p class="footer-company-about">
+					<span>Trạng Nguyên Việt <sup>&copy;</sup> 2017</span>
+					<h5>Giấy phép hoạt động số 488/GP - BTTTT - cấp ngày 22/09/2015</h5>
+					<h5>trangnguyen.edu.vn sử dụng tốt nhất bằng trình duyệt Google Chrome có thể download <strong><a target="_blank" href="https://www.google.com/chrome/browser/desktop/">tại đây</a></strong></h5>
+				</p>
+				<div class="footer-icons">
+					<a href="https://www.facebook.com/trangnguyen.edu.vn" target="_blank"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-google-plus"></i></a>
+					<a href="https://www.youtube.com/channel/UC3LBfRGC48Urx0BnIjA1XiQ" target="_blank"><i class="fa fa-youtube"></i></a>
+					<a href="https://www.google.com/chrome/browser/desktop/" target="_blank"><i class="fa fa-chrome"></i></a>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12 footer-right">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><a href="https://www.google.com/maps/place/Tr%E1%BA%A1ng+Nguy%C3%AAn+Vi%E1%BB%87t/@20.9627653,105.7441931,17z/data=!4m5!3m4!1s0x0:0x935afc0f890f89ac!8m2!3d20.96229!4d105.7464659" target="_blank"><span>Phòng 2001 - CT8C The Spark - đường Tố Hữu</span>Dương Nội, Hà Đông, Hà Nội</a></p>
+				</div>
+				<div>
+					<i class="fa fa-phone"></i>
+					<p><a href="tel:0466668786">024 6666 8786</a></p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:hotro@trangnguyen.edu.vn">hotro@trangnguyen.edu.vn</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<script>
+	$(function () {
+		$('.navbar-left .dropdown').hover(function () {
+			$(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
+		}, function () {
+			$(this).find('.dropdown-menu').first().stop(true, true).slideUp(105)
+		});
+		$('.navbar-right .menu').slimScroll({height: '400px'});
+		$(".user-menu ul.dropdown-menu").on("click", function(e) {
+			if($(e.target).prop("tagName")!='A') e.stopPropagation();
+		});
+	});
+</script>
+{{#publish}}
+{{>google_analytics}}
+{{/publish}}
