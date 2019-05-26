@@ -5,4 +5,4 @@ node_modules/
 /test*.js
 /app/public/sitemap.xml
 /package-lock.json
-/app/public/plugins
+# /app/public/plugins
